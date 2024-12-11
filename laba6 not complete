@@ -17,54 +17,26 @@ def create_file():
     else:
         label_file.config(text="Ошибка: файл не был выбран для сохранения.")
 
-# Функция для чтения файла и расчёта среднего значения
-def read_file_and_calculate():
-    file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
-
-    if file_path:
-        try:
-            with open(file_path, "r") as file:
-                numbers = [int(line.strip()) for line in file]
-
-                # Рассчитываем среднее значение
-                if numbers:
-                    avg = sum(numbers) / len(numbers)
-                else:
-                    avg = 0
-
-                # Отображаем результаты
-                label_file.config(text=f"Содержимое файла:\n{numbers}")
-                label_avg.config(text=f"Среднее значение: {avg:.2f}")
-        except Exception as e:
-            label_file.config(text=f"Ошибка при чтении файла: {e}")
-    else:
-        label_file.config(text="Ошибка: файл не был выбран для чтения.")
-
 # Основное окно приложения
 root = tk.Tk()
 root.title("Работа с файлами")
 root.geometry("400x300")  # Увеличиваем размер окна
-root.configure(bg='lightgreen')  # Устанавливаем цвет фона
+root.configure(bg='lightgrey')  # Устанавливаем цвет фона
 
 # Шрифт для всех виджетов
 font_style = ('Arial', 12)
 
 # Кнопка для создания файла
-create_file_btn = tk.Button(root, text="Создать файл с числами", command=create_file, bg='red', fg='white', font=font_style)
+create_file_btn = tk.Button(root, text="Создать файл с числами", command=create_file, bg='purple', fg='white', font=font_style)
 create_file_btn.pack(pady=10)
 
-# Кнопка для чтения файла и вычисления среднего значения
-read_file_btn = tk.Button(root, text="Прочитать файл и вычислить среднее", command=read_file_and_calculate, bg='blue', fg='white', font=font_style)
-read_file_btn.pack(pady=10)
-
 # Метка для вывода выбранного файла или ошибок
-label_file = tk.Label(root, text="", bg='lightgreen', font=font_style)
+label_file = tk.Label(root, text="", bg='lightgrey', font=font_style)
 label_file.pack(pady=10)
 
 # Метка для отображения среднего значения
-label_avg = tk.Label(root, text="", bg='lightgreen', font=font_style)
+label_avg = tk.Label(root, text="", bg='lightgrey', font=font_style)
 label_avg.pack(pady=10)
 
-# Запуск основного цикла приложения
 root.mainloop()
 
