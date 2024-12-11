@@ -1,0 +1,41 @@
+import tkinter as tk
+from tkinter import filedialog
+import random
+
+# Функция для создания файла с числами
+def create_file():
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Files", "*.txt")])
+
+    if file_path:
+        with open(file_path, "w") as file:
+            # Генерируем 10 случайных чисел и записываем их в файл
+            numbers = [random.randint(1, 100) for _ in range(10)]
+            for num in numbers:
+                file.write(str(num) + "\n")
+
+        label_file.config(text=f"Файл создан и сохранён: {file_path}")
+    else:
+        label_file.config(text="Ошибка: файл не был выбран для сохранения.")
+
+# Основное окно приложения
+root = tk.Tk()
+root.title("Работа с файлами")
+root.geometry("400x300")  # Увеличиваем размер окна
+root.configure(bg='lightgrey')  # Устанавливаем цвет фона
+
+# Шрифт для всех виджетов
+font_style = ('Arial', 12)
+
+# Кнопка для создания файла
+create_file_btn = tk.Button(root, text="Создать файл с числами", command=create_file, bg='purple', fg='white', font=font_style)
+create_file_btn.pack(pady=10)
+
+# Метка для вывода выбранного файла или ошибок
+label_file = tk.Label(root, text="", bg='lightgrey', font=font_style)
+label_file.pack(pady=10)
+
+# Метка для отображения среднего значения
+label_avg = tk.Label(root, text="", bg='lightgrey', font=font_style)
+label_avg.pack(pady=10)
+
+root.mainloop()
